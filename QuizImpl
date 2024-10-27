@@ -1,0 +1,41 @@
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class QuizImpl extends UnicastRemoteObject implements Quiz {
+    private String[] questions = {
+        "Qual é a capital da França?",
+        "Qual é 2 + 2?",
+        "Qual é o maior planeta do sistema solar?"
+    };
+
+    private String[] answers = {
+        "Paris",
+        "4",
+        "Júpiter"
+    };
+
+    protected QuizImpl() throws RemoteException {
+        super();
+    }
+
+    @Override
+    public String getQuestion(int questionNumber) throws RemoteException {
+        if (questionNumber >= 0 && questionNumber < questions.length) {
+            return questions[questionNumber];
+        }
+        return null;
+    }
+
+    @Override
+    public boolean checkAnswer(int questionNumber, String answer) throws RemoteException {
+        if (questionNumber >= 0 && questionNumber < answers.length) {
+            return answers[questionNumber].equalsIgnoreCase(answer);
+        }
+        return false;
+    }
+
+    @Override
+    public int getTotalQuestions() throws RemoteException {
+        return questions.length;
+    }
+}

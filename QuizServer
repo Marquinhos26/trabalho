@@ -1,0 +1,15 @@
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class QuizServer {
+    public static void main(String[] args) {
+        try {
+            Quiz quiz = new QuizImpl();
+            Registry registry = LocateRegistry.createRegistry(1099);
+            registry.rebind("QuizService", quiz);
+            System.out.println("Servidor de Quiz está pronto.");
+        } catch (Exception e) {
+            System.err.println("Erro no servidor: " + e.toString());
+        }
+    }
+}

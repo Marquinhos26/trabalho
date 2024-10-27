@@ -1,0 +1,8 @@
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface Quiz extends Remote {
+    String getQuestion(int questionNumber) throws RemoteException;
+    boolean checkAnswer(int questionNumber, String answer) throws RemoteException;
+    int getTotalQuestions() throws RemoteException;
+}
